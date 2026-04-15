@@ -112,7 +112,9 @@ async function chatAI(message) {
 // ================= MAIN HANDLER =================
 export default async function handler(req, res) {
   try {
-    const { message } = req.body;
+    console.log("MESSAGE:", message);
+    const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+    const message = body?.message;
 
     const result = await classifyMessage(message);
 
