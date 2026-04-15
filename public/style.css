@@ -1,0 +1,375 @@
+:root{
+  --bg:#212121;
+  --panel:#2f2f2f;
+  --text:#e5e5e5;
+}
+
+body.light{
+  --bg:#f7f7f8;
+  --panel:#ececec;
+  --text:#111827;
+}
+
+body{
+  margin:0;
+  font-family: 'Inter', system-ui;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x: clip;
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* LAYOUT */
+.app{
+  display:flex;
+  min-height:100vh;
+  
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width:60px;
+  background:#171717;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:12px;
+  gap:16px;
+  z-index: 1000;
+}
+
+.sidebar button{
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.sidebar button:hover{
+  background:#2a2a2a;
+}
+
+/* MAIN */
+.main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  margin-left: 60px;
+  height: 100vh;
+  z-index: 1;
+  overflow-y:auto;
+}
+
+/* HEADER */
+.header{
+  padding:16px 20px;
+  font-size:22px;
+  font-weight:700;
+}
+
+/* CHAT */
+.chat{
+  flex:1;
+  max-width:750px;
+  min-width: 0 ;
+  margin:0 auto;        /* 👈 luôn nằm giữa */
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  overflow: visible;
+  padding-bottom: 180px;
+  width: 100%;
+  
+  
+}
+
+/* MESSAGE */
+
+
+/* IMAGE */
+.chat img{
+  max-width:140px;
+  border-radius:10px;
+  margin-top:6px;
+}
+
+/* INPUT */
+.input-wrap{
+  padding:20px;
+  position: fixed;
+  bottom: 0;
+  left: 110px;
+  right: 0;
+  background: var(--bg);
+  
+  display: flex;
+  justify-content: center;
+}
+
+/* PREVIEW */
+.preview{
+  display:flex;
+  gap:8px;
+  margin:0 auto 10px;
+  margin-bottom:8px;
+
+}
+
+.preview img{
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* INPUT BOX */
+.input-box{
+  max-width:750px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width: 100%;
+  background:var(--panel);
+  border-radius:30px;
+  padding:12px 16px;
+  position: relative;
+  box-shadow:0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* TEXT */
+textarea{
+  flex:1;
+  border:none;
+  outline:none;
+  resize:none;
+  background:transparent;
+  color:var(--text);
+  font-size:16px;   
+  line-height:1.5;  
+}
+
+/* ICON */
+.icon-btn{
+  background: transparent; /* 👈 QUAN TRỌNG */
+  border: none;
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position: relative;
+}
+
+.sidebar{
+  height:100vh;   /* 👈 đứng yên full màn */
+  position: fixed;
+  top:0;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:12px;
+  gap:16px;
+}
+
+.icon-btn svg,
+.sidebar svg{
+  width:20px;
+  height:20px;
+  stroke:#9ca3af;
+  fill:none;
+  stroke-width:2;
+}
+
+.icon-btn:hover svg,
+.sidebar button:hover svg{
+  stroke:white;
+}
+
+/* SEND */
+.send-btn{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#fff;
+  border:none;
+  cursor:pointer;
+  position: relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.send-btn svg{
+  width:20px;
+  height:20px;
+  stroke:black;
+  stroke-width:4; /* 👈 QUAN TRỌNG: làm dày */
+  fill:none;
+}
+
+.send-btn{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#fff;
+  border:none;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.send-btn svg{
+  width:20px;
+  height:20px;
+  stroke:black;
+  stroke-width:3; /* 👈 QUAN TRỌNG: làm dày */
+  fill:none;
+}
+
+/* WRAPPER */
+.msg{
+  display:flex;
+  width:100%;
+  padding: 0 20px;
+  min-width: 0;
+}
+
+/* BOT → TRÁI */
+.msg.bot{
+justify-content: flex-start;
+}
+
+/* USER → PHẢI */
+.msg.user{
+  justify-content: flex-end;
+}
+
+/* BUBBLE */
+.bubble{
+  max-width:70%;
+  padding:12px 16px;
+  border-radius:16px;
+  background:#303030;
+  color:white;
+
+  white-space:pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  flex-shrink: 1;
+  min-width: 0;
+  display: block;   /* 👈 đổi cái này */
+}
+
+.msg.user .bubble{
+  margin-left: auto;
+  background: #2f2f2f;
+}
+
+.bubble img{
+  display:block;
+  border-radius:12px;
+  margin-top:8px;
+}
+
+
+
+/* Hover hiện ra */
+.icon-btn:hover .tooltip{
+  opacity: 1;
+  left: 55px;
+}
+
+/* Thanh scroll tổng */
+::-webkit-scrollbar{
+  width: 8px; /* 👈 độ dày */
+}
+
+/* Nền phía sau */
+::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+/* Thanh kéo */
+::-webkit-scrollbar-thumb{
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+}
+
+/* Hover đẹp hơn */
+::-webkit-scrollbar-thumb:hover{
+  background: rgba(0,0,0,0.5);
+}
+
+body:not(.light) ::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,0.2);
+}
+
+body:not(.light) ::-webkit-scrollbar-thumb:hover{
+  background: rgba(255,255,255,0.4);
+}
+
+
+
+.icon-btn:hover .tooltip,
+.send-btn:hover .tooltip{
+  opacity:1;
+}
+
+/* TOOLTIP BASE */
+.tooltip{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+  transition:0.2s;
+
+  background:#111;
+  color:#fff;
+  padding:5px 8px;
+  border-radius:6px;
+  font-size:11px;
+  white-space:nowrap;
+}
+
+/* SIDEBAR → bên phải */
+.sidebar .tooltip{
+  left:50px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+/* INPUT → phía trên */
+.input-box .tooltip{
+  left:50%;
+  bottom:130%;
+  transform:translateX(-50%);
+}
+
+/* HOVER SIDEBAR */
+.sidebar .icon-btn:hover .tooltip{
+  opacity:1;
+  left:55px;
+}
+
+/* HOVER INPUT */
+.input-box .icon-btn:hover .tooltip,
+.input-box .send-btn:hover .tooltip{
+  opacity:1;
+}
