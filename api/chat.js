@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = require("axios");
 
 const API_KEY = process.env.GROQ_API_KEY;
 const SHEET_URL = process.env.SHEET_URL;
@@ -110,7 +110,7 @@ async function chatAI(message) {
 }
 
 // ================= MAIN HANDLER =================
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   try {
     console.log("MESSAGE:", message);
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
