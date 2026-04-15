@@ -91,11 +91,18 @@ async function send(){
   const bot=add("bot","...");
 
   try{
-    const res=await fetch("/api/chat",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({message:text})
-    });
+  const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000/chat"
+    : "/api/chat";
+
+const res = await fetch(API_URL, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ message: text })
+});
 
     const data=await res.json();
     bot.innerText=data.reply;
