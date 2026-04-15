@@ -112,9 +112,14 @@ async function chatAI(message) {
 // ================= MAIN HANDLER =================
 module.exports = async (req, res) => {
   try {
-    console.log("MESSAGE:", message);
-    const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+    const body = req.body;
     const message = body?.message;
+
+    console.log("MESSAGE:", message);
+
+    if (!message) {
+      return res.status(400).json({ reply: "Thiếu message" });
+    }
 
     const result = await classifyMessage(message);
 
@@ -128,11 +133,11 @@ module.exports = async (req, res) => {
 
     const reply = await chatAI(message);
 
-    res.status(200).json({ reply });
+    return res.status(200).json({ reply });
 
   } catch (err) {
-    console.log(err.message);
-    res.status(500).json({ reply: "Lỗi server" });
+    console.log(err);
+    return res.status(500).json({ reply: "Lỗi server" });
   }
-}
+};
 
