@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 require("dotenv").config();
-
+const { createEvent } = require("./calendar");
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -80,11 +80,28 @@ function parseTime(text) {
     now.setHours(match[1], 0, 0);
   }
 
-  return now.toLocaleString("vi-VN");
+  return now.toISOString();
 }
 
 // ================= GOOGLE SHEET =================
 async function sendToSheet(result) {
+  if (!result.items || result.items.length === 0) return;
+
+  for (const item of result.items) {
+    const parsedTime = parseTime(item.time);
+
+    // 1. LƯU GOOGLE SHEETS
+    await axios.post(SHEET_URL, {
+      task: item.task,
+      time: parsedTime,
+      type: result.intent,
+      priority: item.priority || "normal"
+    });
+
+    // 2. TẠO GOOGLE CALENDAR EVENT (MỚI THÊM)
+    await createEvent(item.task, parsedTime);
+  }
+} {  
   if (!result.items || result.items.length === 0) return;
 
   for (const item of result.items) {
